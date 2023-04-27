@@ -57,3 +57,104 @@ type ProtocolFeeRecipientUpdate @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+type AssetRecipientChange @entity(immutable: true) {
+  id: Bytes!
+  oldRecipient: Bytes! # address
+  newRecipient: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DeltaUpdate @entity(immutable: true) {
+  id: Bytes!
+  oldDelta: BigInt! # uint128
+  newDelta: BigInt! # uint128
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ERC721Deposit @entity(immutable: true) {
+  id: Bytes!
+  depositer: Bytes! # address
+  ids: [BigInt!]! # uint256[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FeeUpdate @entity(immutable: true) {
+  id: Bytes!
+  oldFee: BigInt! # uint96
+  newFee: BigInt! # uint96
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ContractOwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SpotPriceUpdate @entity(immutable: true) {
+  id: Bytes!
+  oldSpotPrice: BigInt! # uint128
+  newSpotPrice: BigInt! # uint128
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Swap @entity(immutable: true) {
+  id: Bytes!
+  sender: Bytes! # address
+  tokenIn: BigInt! # uint256
+  nftIdsIn: [BigInt!]! # uint256[]
+  tokenOut: BigInt! # uint256
+  nftIdsOut: [BigInt!]! # uint256[]
+  recipient: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Sync @entity(immutable: true) {
+  id: Bytes!
+  reserve0: BigInt! # uint256
+  reserve1: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenDeposit @entity(immutable: true) {
+  id: Bytes!
+  sender: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenWithdrawal @entity(immutable: true) {
+  id: Bytes!
+  recipient: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type WithdrawERC721 @entity(immutable: true) {
+  id: Bytes!
+  recipient: Bytes! # address
+  ids: [BigInt!]! # uint256[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
