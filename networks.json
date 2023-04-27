@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "SeacowsPairERC721Factory": {
+      "address": "0x3cc3bb68941b6664e90d004a0e5c5c9644e27f36",
+      "startBlock": 8902016
+    }
+  }
+}

@@ -1,0 +1,42 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: SeacowsPairERC721Factory
+    network: goerli
+    source:
+      address: "0x3cc3bb68941b6664e90d004a0e5c5c9644e27f36"
+      abi: SeacowsPairERC721Factory
+      startBlock: 8902016
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - BondingCurveStatusUpdate
+        - CallTargetStatusUpdate
+        - NewPair
+        - OwnershipTransferred
+        - ProtocolFeeDisabled
+        - ProtocolFeeMultiplierUpdate
+        - ProtocolFeeRecipientUpdate
+      abis:
+        - name: SeacowsPairERC721Factory
+          file: ./abis/SeacowsPairERC721Factory.json
+      eventHandlers:
+        - event: BondingCurveStatusUpdate(address,bool)
+          handler: handleBondingCurveStatusUpdate
+        - event: CallTargetStatusUpdate(address,bool)
+          handler: handleCallTargetStatusUpdate
+        - event: NewPair(address)
+          handler: handleNewPair
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ProtocolFeeDisabled(address,bool)
+          handler: handleProtocolFeeDisabled
+        - event: ProtocolFeeMultiplierUpdate(uint256)
+          handler: handleProtocolFeeMultiplierUpdate
+        - event: ProtocolFeeRecipientUpdate(address)
+          handler: handleProtocolFeeRecipientUpdate
+      file: ./src/seacows-pair-erc-721-factory.ts
