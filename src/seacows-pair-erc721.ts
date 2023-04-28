@@ -7,23 +7,11 @@ import {
   OwnershipTransferred as OwnershipTransferredEvent,
   SpotPriceUpdate as SpotPriceUpdateEvent,
   Swap as SwapEvent,
-  Sync as SyncEvent,
   TokenDeposit as TokenDepositEvent,
   TokenWithdrawal as TokenWithdrawalEvent,
   WithdrawERC721 as WithdrawERC721Event,
 } from "../generated/templates/SeacowsPairERC721/SeacowsPairERC721";
 import {
-  AssetRecipientChange,
-  DeltaUpdate,
-  ERC721Deposit,
-  FeeUpdate,
-  OwnershipTransferred,
-  SpotPriceUpdate,
-  Swap,
-  Sync,
-  TokenDeposit,
-  TokenWithdrawal,
-  WithdrawERC721,
   NewPair,
   Pair,
   DailyPoolStat,
@@ -35,19 +23,6 @@ import { plusBigInt } from "./utilities";
 export function handleAssetRecipientChange(
   event: AssetRecipientChangeEvent
 ): void {
-  let entity = new AssetRecipientChange(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.oldRecipient = event.params.oldRecipient;
-  entity.newRecipient = event.params.newRecipient;
-  entity.pair = event.address.toHexString();
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-
   let pair = Pair.load(event.address.toHexString())!;
   updatePairAttributesIfMissing(pair);
   if (pair) {
@@ -57,19 +32,6 @@ export function handleAssetRecipientChange(
 }
 
 export function handleDeltaUpdate(event: DeltaUpdateEvent): void {
-  let entity = new DeltaUpdate(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.oldDelta = event.params.oldDelta;
-  entity.newDelta = event.params.newDelta;
-  entity.pair = event.address.toHexString();
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-
   let pair = Pair.load(event.address.toHexString())!;
   updatePairAttributesIfMissing(pair);
   if (pair) {
@@ -79,19 +41,6 @@ export function handleDeltaUpdate(event: DeltaUpdateEvent): void {
 }
 
 export function handleERC721Deposit(event: ERC721DepositEvent): void {
-  let entity = new ERC721Deposit(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.depositor = event.params.depositer;
-  entity.ids = event.params.ids;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-  entity.pair = event.address.toHexString();
-
-  entity.save();
-
   const numOfNfts = event.params.ids.length;
   let pair = Pair.load(event.address.toHexString())!;
   updatePairAttributesIfMissing(pair);
@@ -134,19 +83,6 @@ export function handleERC721Deposit(event: ERC721DepositEvent): void {
 }
 
 export function handleFeeUpdate(event: FeeUpdateEvent): void {
-  let entity = new FeeUpdate(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.oldFee = event.params.oldFee;
-  entity.newFee = event.params.newFee;
-  entity.pair = event.address.toHexString();
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-
   let pair = Pair.load(event.address.toHexString())!;
   updatePairAttributesIfMissing(pair);
   if (pair) {
@@ -159,18 +95,6 @@ export function handleFeeUpdate(event: FeeUpdateEvent): void {
 export function handleOwnershipTransferred(
   event: OwnershipTransferredEvent
 ): void {
-  let entity = new OwnershipTransferred(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.newOwner = event.params.newOwner;
-  entity.pair = event.address.toHexString();
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-
   let pair = Pair.load(event.address.toHexString())!;
   updatePairAttributesIfMissing(pair);
   if (pair) {
@@ -181,17 +105,6 @@ export function handleOwnershipTransferred(
 }
 
 export function handleSpotPriceUpdate(event: SpotPriceUpdateEvent): void {
-  let entity = new SpotPriceUpdate(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.oldSpotPrice = event.params.oldSpotPrice;
-  entity.newSpotPrice = event.params.newSpotPrice;
-  entity.pair = event.address.toHexString();
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
   let pair = Pair.load(event.address.toHexString())!;
   updatePairAttributesIfMissing(pair);
   if (pair) {
@@ -199,27 +112,9 @@ export function handleSpotPriceUpdate(event: SpotPriceUpdateEvent): void {
     pair.updatedAt = event.block.timestamp;
     pair.save();
   }
-
-  entity.save();
 }
 
 export function handleSwap(event: SwapEvent): void {
-  let entity = new Swap(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.sender = event.params.sender;
-  entity.tokenIn = event.params.tokenIn;
-  entity.nftIdsIn = event.params.nftIdsIn;
-  entity.tokenOut = event.params.tokenOut;
-  entity.nftIdsOut = event.params.nftIdsOut;
-  entity.recipient = event.params.recipient;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-
   let pair = Pair.load(event.address.toHexString())!;
   updatePairAttributesIfMissing(pair);
 
@@ -305,34 +200,7 @@ export function handleSwap(event: SwapEvent): void {
   );
 }
 
-export function handleSync(event: SyncEvent): void {
-  let entity = new Sync(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.reserve0 = event.params.reserve0;
-  entity.reserve1 = event.params.reserve1;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
 export function handleTokenDeposit(event: TokenDepositEvent): void {
-  let entity = new TokenDeposit(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.sender = event.params.sender;
-  entity.amount = event.params.amount;
-  entity.pair = event.address.toHexString();
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-
   let pair = Pair.load(event.address.toHexString())!;
   updatePairAttributesIfMissing(pair);
   pair.tokenLiquidity = pair.tokenLiquidity!.plus(event.transaction.value);
@@ -348,7 +216,7 @@ export function handleTokenDeposit(event: TokenDepositEvent): void {
   }
   dailyProtocolStats.tokenDeposited = plusBigInt(
     dailyProtocolStats.tokenDeposited,
-    entity.amount
+    event.params.amount
   );
 
   let dailyPairStats = DailyPairStat.load(pair.id + "-" + dayString);
@@ -358,7 +226,7 @@ export function handleTokenDeposit(event: TokenDepositEvent): void {
   }
   dailyPairStats.tokenDeposited = plusBigInt(
     dailyPairStats.tokenDeposited,
-    entity.amount
+    event.params.amount
   );
 
   let dailyPoolStats = DailyPoolStat.load(pair.nft + "-" + dayString);
@@ -368,24 +236,11 @@ export function handleTokenDeposit(event: TokenDepositEvent): void {
   }
   dailyPoolStats.tokenDeposited = plusBigInt(
     dailyPoolStats.tokenDeposited,
-    entity.amount
+    event.params.amount
   );
 }
 
 export function handleTokenWithdrawal(event: TokenWithdrawalEvent): void {
-  let entity = new TokenWithdrawal(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.recipient = event.params.recipient;
-  entity.amount = event.params.amount;
-  entity.pair = event.address.toHexString();
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-
   let pair = Pair.load(event.address.toHexString())!;
   updatePairAttributesIfMissing(pair);
   pair.tokenLiquidity = pair.tokenLiquidity!.minus(event.params.amount);
@@ -401,7 +256,7 @@ export function handleTokenWithdrawal(event: TokenWithdrawalEvent): void {
   }
   dailyProtocolStats.tokenWithdrawn = plusBigInt(
     dailyProtocolStats.tokenWithdrawn,
-    entity.amount
+    event.params.amount
   );
 
   let dailyPairStats = DailyPairStat.load(pair.id + "-" + dayString);
@@ -411,7 +266,7 @@ export function handleTokenWithdrawal(event: TokenWithdrawalEvent): void {
   }
   dailyPairStats.tokenWithdrawn = plusBigInt(
     dailyPairStats.tokenWithdrawn,
-    entity.amount
+    event.params.amount
   );
 
   let dailyPoolStats = DailyPoolStat.load(pair.nft + "-" + dayString);
@@ -421,24 +276,11 @@ export function handleTokenWithdrawal(event: TokenWithdrawalEvent): void {
   }
   dailyPoolStats.tokenWithdrawn = plusBigInt(
     dailyPoolStats.tokenWithdrawn,
-    entity.amount
+    event.params.amount
   );
 }
 
 export function handleWithdrawERC721(event: WithdrawERC721Event): void {
-  let entity = new WithdrawERC721(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.recipient = event.params.recipient;
-  entity.ids = event.params.ids;
-  entity.pair = event.address.toHexString();
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-
   const numOfNfts = event.params.ids.length;
 
   let pair = Pair.load(event.address.toHexString())!;
