@@ -6,9 +6,9 @@ dataSources:
     name: SeacowsPairERC721Factory
     network: goerli
     source:
-      address: "0x7Ce4691EC1cdb8A89CAF25FDF03AC15c78F8e27c"
+      address: "0xb8274191d606faf44d2465488e9a90093786069f"
       abi: SeacowsPairERC721Factory
-      startBlock: 8864721
+      startBlock: 8903817
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
