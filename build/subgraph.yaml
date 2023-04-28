@@ -1,0 +1,91 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: SeacowsPairERC721Factory
+    network: goerli
+    source:
+      address: "0x3cc3bb68941b6664e90d004a0e5c5c9644e27f36"
+      abi: SeacowsPairERC721Factory
+      startBlock: 8902016
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - BondingCurveStatusUpdate
+        - CallTargetStatusUpdate
+        - NewPair
+        - OwnershipTransferred
+        - ProtocolFeeDisabled
+        - ProtocolFeeMultiplierUpdate
+        - ProtocolFeeRecipientUpdate
+      abis:
+        - name: SeacowsPairERC721Factory
+          file: SeacowsPairERC721Factory/abis/SeacowsPairERC721Factory.json
+      eventHandlers:
+        - event: BondingCurveStatusUpdate(address,bool)
+          handler: handleBondingCurveStatusUpdate
+        - event: CallTargetStatusUpdate(address,bool)
+          handler: handleCallTargetStatusUpdate
+        - event: NewPair(address)
+          handler: handleNewPair
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ProtocolFeeDisabled(address,bool)
+          handler: handleProtocolFeeDisabled
+        - event: ProtocolFeeMultiplierUpdate(uint256)
+          handler: handleProtocolFeeMultiplierUpdate
+        - event: ProtocolFeeRecipientUpdate(address)
+          handler: handleProtocolFeeRecipientUpdate
+      file: SeacowsPairERC721Factory/SeacowsPairERC721Factory.wasm
+templates:
+  - kind: ethereum
+    name: SeacowsPairERC721
+    network: goerli
+    source:
+      abi: SeacowsPairERC721
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AssetRecipientChange
+        - DeltaUpdate
+        - ERC721Deposit
+        - FeeUpdate
+        - ContractOwnershipTransferred
+        - SpotPriceUpdate
+        - Swap
+        - Sync
+        - TokenDeposit
+        - TokenWithdrawal
+        - WithdrawERC721
+      abis:
+        - name: SeacowsPairERC721
+          file: SeacowsPairERC721/abis/SeacowsPairERC721.json
+      eventHandlers:
+        - event: AssetRecipientChange(address,address)
+          handler: handleAssetRecipientChange
+        - event: DeltaUpdate(uint128,uint128)
+          handler: handleDeltaUpdate
+        - event: ERC721Deposit(indexed address,uint256[])
+          handler: handleERC721Deposit
+        - event: FeeUpdate(uint96,uint96)
+          handler: handleFeeUpdate
+        - event: OwnershipTransferred(indexed address)
+          handler: handleOwnershipTransferred
+        - event: SpotPriceUpdate(uint128,uint128)
+          handler: handleSpotPriceUpdate
+        - event: Swap(indexed address,uint256,uint256[],uint256,uint256[],indexed address)
+          handler: handleSwap
+        - event: Sync(uint256,uint256)
+          handler: handleSync
+        - event: TokenDeposit(indexed address,uint256)
+          handler: handleTokenDeposit
+        - event: TokenWithdrawal(indexed address,uint256)
+          handler: handleTokenWithdrawal
+        - event: WithdrawERC721(indexed address,uint256[])
+          handler: handleWithdrawERC721
+      file: templates/SeacowsPairERC721/SeacowsPairERC721.wasm
