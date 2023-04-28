@@ -46,17 +46,21 @@ export class NewPair extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get address(): string {
+  get address(): string | null {
     let value = this.get("address");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return null;
     } else {
       return value.toString();
     }
   }
 
-  set address(value: string) {
-    this.set("address", Value.fromString(value));
+  set address(value: string | null) {
+    if (!value) {
+      this.unset("address");
+    } else {
+      this.set("address", Value.fromString(<string>value));
+    }
   }
 
   get owner(): string {
@@ -140,30 +144,38 @@ export class NewPair extends Entity {
     }
   }
 
-  get nft(): string {
+  get nft(): string | null {
     let value = this.get("nft");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return null;
     } else {
       return value.toString();
     }
   }
 
-  set nft(value: string) {
-    this.set("nft", Value.fromString(value));
+  set nft(value: string | null) {
+    if (!value) {
+      this.unset("nft");
+    } else {
+      this.set("nft", Value.fromString(<string>value));
+    }
   }
 
-  get erc20Contract(): string {
+  get erc20Contract(): string | null {
     let value = this.get("erc20Contract");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return null;
     } else {
       return value.toString();
     }
   }
 
-  set erc20Contract(value: string) {
-    this.set("erc20Contract", Value.fromString(value));
+  set erc20Contract(value: string | null) {
+    if (!value) {
+      this.unset("erc20Contract");
+    } else {
+      this.set("erc20Contract", Value.fromString(<string>value));
+    }
   }
 
   get initialBondingCurveAddress(): string | null {
@@ -427,30 +439,38 @@ export class Pair extends Entity {
     }
   }
 
-  get nft(): string {
+  get nft(): string | null {
     let value = this.get("nft");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return null;
     } else {
       return value.toString();
     }
   }
 
-  set nft(value: string) {
-    this.set("nft", Value.fromString(value));
+  set nft(value: string | null) {
+    if (!value) {
+      this.unset("nft");
+    } else {
+      this.set("nft", Value.fromString(<string>value));
+    }
   }
 
-  get erc20Contract(): string {
+  get erc20Contract(): string | null {
     let value = this.get("erc20Contract");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return null;
     } else {
       return value.toString();
     }
   }
 
-  set erc20Contract(value: string) {
-    this.set("erc20Contract", Value.fromString(value));
+  set erc20Contract(value: string | null) {
+    if (!value) {
+      this.unset("erc20Contract");
+    } else {
+      this.set("erc20Contract", Value.fromString(<string>value));
+    }
   }
 
   get bondingCurveAddress(): string | null {

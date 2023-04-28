@@ -71,9 +71,10 @@ export function handleERC721Deposit(event: ERC721DepositEvent): void {
     BigInt.fromI32(numOfNfts)
   );
 
-  let dailyPoolStats = DailyPoolStat.load(pair.nft + "-" + dayString);
+  const dailyPoolStatId = pair.nft! + "-" + dayString;
+  let dailyPoolStats = DailyPoolStat.load(dailyPoolStatId);
   if (!dailyPoolStats) {
-    dailyPoolStats = new DailyPoolStat(pair.nft + "-" + dayString);
+    dailyPoolStats = new DailyPoolStat(dailyPoolStatId);
     dailyPoolStats.nftsDeposited = BigInt.fromI32(0);
   }
   dailyPoolStats.nftsDeposited = plusBigInt(
@@ -178,9 +179,10 @@ export function handleSwap(event: SwapEvent): void {
     event.params.tokenOut
   );
 
-  let dailyPoolStats = DailyPoolStat.load(pair.nft + "-" + dayString);
+  const dailyPoolStatId = pair.nft! + "-" + dayString;
+  let dailyPoolStats = DailyPoolStat.load(dailyPoolStatId);
   if (!dailyPoolStats) {
-    dailyPoolStats = new DailyPoolStat(pair.nft + "-" + dayString);
+    dailyPoolStats = new DailyPoolStat(dailyPoolStatId);
   }
   dailyPoolStats.numSwaps = plusBigInt(
     dailyPoolStats.numSwaps,
@@ -229,9 +231,10 @@ export function handleTokenDeposit(event: TokenDepositEvent): void {
     event.params.amount
   );
 
-  let dailyPoolStats = DailyPoolStat.load(pair.nft + "-" + dayString);
+  const dailyPoolStatId = pair.nft! + "-" + dayString;
+  let dailyPoolStats = DailyPoolStat.load(dailyPoolStatId);
   if (!dailyPoolStats) {
-    dailyPoolStats = new DailyPoolStat(pair.nft + "-" + dayString);
+    dailyPoolStats = new DailyPoolStat(dailyPoolStatId);
     dailyPoolStats.tokenDeposited = BigInt.fromI32(0);
   }
   dailyPoolStats.tokenDeposited = plusBigInt(
@@ -269,9 +272,10 @@ export function handleTokenWithdrawal(event: TokenWithdrawalEvent): void {
     event.params.amount
   );
 
-  let dailyPoolStats = DailyPoolStat.load(pair.nft + "-" + dayString);
+  const dailyPoolStatId = pair.nft! + "-" + dayString;
+  let dailyPoolStats = DailyPoolStat.load(dailyPoolStatId);
   if (!dailyPoolStats) {
-    dailyPoolStats = new DailyPoolStat(pair.nft + "-" + dayString);
+    dailyPoolStats = new DailyPoolStat(dailyPoolStatId);
     dailyPoolStats.tokenWithdrawn = BigInt.fromI32(0);
   }
   dailyPoolStats.tokenWithdrawn = plusBigInt(
@@ -318,9 +322,10 @@ export function handleWithdrawERC721(event: WithdrawERC721Event): void {
     BigInt.fromI32(numOfNfts)
   );
 
-  let dailyPoolStats = DailyPoolStat.load(pair.nft + "-" + dayString);
+  const dailyPoolStatId = pair.nft! + "-" + dayString;
+  let dailyPoolStats = DailyPoolStat.load(dailyPoolStatId);
   if (!dailyPoolStats) {
-    dailyPoolStats = new DailyPoolStat(pair.nft + "-" + dayString);
+    dailyPoolStats = new DailyPoolStat(dailyPoolStatId);
     dailyPoolStats.nftsWithdrawn = BigInt.fromI32(0);
   }
   dailyPoolStats.nftsWithdrawn = plusBigInt(

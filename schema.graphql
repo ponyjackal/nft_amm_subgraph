@@ -1,13 +1,13 @@
 type NewPair @entity {
   id: ID!
-  address: String!
+  address: String
   owner: String!
   blockNumber: BigInt
   createdAt: BigInt
   updatedAt: BigInt
   createdTx: String
-  nft: String!
-  erc20Contract: String!
+  nft: String
+  erc20Contract: String
   initialBondingCurveAddress: String
   initialAssetRecipient: String
   poolType: BigInt
@@ -26,8 +26,8 @@ type Pair @entity {
   createdTx: String
   createdAt: BigInt
   updatedAt: BigInt
-  nft: String!
-  erc20Contract: String!
+  nft: String
+  erc20Contract: String
   bondingCurveAddress: String
   assetRecipient: String
   poolType: BigInt

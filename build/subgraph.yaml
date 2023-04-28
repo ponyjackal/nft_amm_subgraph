@@ -14,13 +14,7 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - BondingCurveStatusUpdate
-        - CallTargetStatusUpdate
         - NewPair
-        - OwnershipTransferred
-        - ProtocolFeeDisabled
-        - ProtocolFeeMultiplierUpdate
-        - ProtocolFeeRecipientUpdate
       abis:
         - name: SeacowsPairERC721Factory
           file: SeacowsPairERC721Factory/abis/SeacowsPairERC721Factory.json
@@ -44,17 +38,7 @@ templates:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - AssetRecipientChange
-        - DeltaUpdate
-        - ERC721Deposit
-        - FeeUpdate
-        - ContractOwnershipTransferred
-        - SpotPriceUpdate
         - Swap
-        - Sync
-        - TokenDeposit
-        - TokenWithdrawal
-        - WithdrawERC721
       abis:
         - name: SeacowsPairERC721
           file: SeacowsPairERC721/abis/SeacowsPairERC721.json
@@ -73,8 +57,6 @@ templates:
           handler: handleSpotPriceUpdate
         - event: Swap(indexed address,uint256,uint256[],uint256,uint256[],indexed address)
           handler: handleSwap
-        - event: Sync(uint256,uint256)
-          handler: handleSync
         - event: TokenDeposit(indexed address,uint256)
           handler: handleTokenDeposit
         - event: TokenWithdrawal(indexed address,uint256)
