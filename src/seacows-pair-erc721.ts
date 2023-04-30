@@ -10,6 +10,7 @@ import {
   TokenDeposit as TokenDepositEvent,
   TokenWithdrawal as TokenWithdrawalEvent,
   WithdrawERC721 as WithdrawERC721Event,
+  InitializeCall,
 } from "../generated/templates/SeacowsPairERC721/SeacowsPairERC721";
 import {
   NewPair,
@@ -334,6 +335,12 @@ export function handleWithdrawERC721(event: WithdrawERC721Event): void {
   );
 }
 
+export function handleInitialize(event: InitializeCall): void {
+  let pair = Pair.load(event.to.toHexString())!;
+
+  updatePairAttributesIfMissing(pair);
+}
+
 export function updatePairAttributesIfMissing(pair: Pair): void {
   if (!pair.spotPrice) {
     let newPair = NewPair.load(pair.createdTx!)!;
@@ -343,6 +350,7 @@ export function updatePairAttributesIfMissing(pair: Pair): void {
     pair.delta = pair.delta || newPair.initialDelta;
     pair.fee = pair.fee || newPair.initialFee;
     pair.inventoryCount = pair.inventoryCount || newPair.initialInventoryCount;
+    pair.nftIdInventory = pair.nftIdInventory || newPair.initialNFTIdInventory;
     pair.nft = pair.nft || newPair.nft;
     pair.owner = pair.owner || newPair.owner;
     pair.poolType = pair.poolType || newPair.poolType;

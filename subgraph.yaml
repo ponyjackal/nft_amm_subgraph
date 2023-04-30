@@ -63,4 +63,7 @@ templates:
           handler: handleTokenWithdrawal
         - event: WithdrawERC721(indexed address,uint256[])
           handler: handleWithdrawERC721
+      callHandlers:
+        - function: initialize((address,address,address,uint8,address,address,address,uint128,uint96,uint128,address))
+          handler: handleInitialize
       file: ./src/seacows-pair-erc721.ts

@@ -36,6 +36,7 @@ export function handleCreatePairETH(event: CreatePairETHCall): void {
   newPair.initialTokenLiquidity = event.transaction.value;
   newPair.owner = event.from.toHexString();
   newPair.save();
+
   const dayString = new Date(event.block.timestamp.toI64() * 1000)
     .toISOString()
     .slice(0, 10)
@@ -98,6 +99,7 @@ export function handleCreatePairERC20(event: CreatePairERC20Call): void {
   newPair.initialTokenLiquidity = param.initialTokenBalance;
   newPair.owner = event.from.toHexString();
   newPair.save();
+
   const dayString = new Date(event.block.timestamp.toI64() * 1000)
     .toISOString()
     .slice(0, 10)
@@ -150,5 +152,6 @@ export function handleNewPair(event: NewPairEvent): void {
   pair.createdTx = event.transaction.hash.toHexString();
   pair.owner = event.transaction.from.toHexString();
   pair.initialAttributes = event.transaction.hash.toHexString();
+
   pair.save();
 }
