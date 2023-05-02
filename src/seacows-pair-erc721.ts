@@ -352,6 +352,7 @@ export function updatePairAttributesIfMissing(pair: Pair): void {
     pair.inventoryCount = pair.inventoryCount || newPair.initialInventoryCount;
     pair.nftIdInventory = pair.nftIdInventory || newPair.initialNFTIdInventory;
     pair.nft = pair.nft || newPair.nft;
+    pair.erc20Contract = pair.erc20Contract || newPair.erc20Contract;
     pair.owner = pair.owner || newPair.owner;
     pair.poolType = pair.poolType || newPair.poolType;
     pair.spotPrice = pair.spotPrice || newPair.initialSpotPrice;
