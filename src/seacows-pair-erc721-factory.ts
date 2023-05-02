@@ -16,7 +16,6 @@ import { WETH } from "./constants";
 
 export function handleCreatePairETH(event: CreatePairETHCall): void {
   let newPair = NewPair.load(event.transaction.hash.toHexString());
-  // todo: initial and current pair attributes/counts
   if (!newPair) {
     newPair = new NewPair(event.transaction.hash.toHexString());
   }
@@ -80,7 +79,6 @@ export function handleCreatePairETH(event: CreatePairETHCall): void {
 
 export function handleCreatePairERC20(event: CreatePairERC20Call): void {
   let newPair = NewPair.load(event.transaction.hash.toHexString());
-  // todo: initial and current pair attributes/counts
   if (!newPair) {
     newPair = new NewPair(event.transaction.hash.toHexString());
   }

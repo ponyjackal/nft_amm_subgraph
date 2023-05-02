@@ -34,6 +34,7 @@ type Pair @entity {
   delta: BigInt
   fee: BigInt
   spotPrice: BigInt
+  lastSalePrice: BigInt
   nftIdInventory: [BigInt!]
   inventoryCount: BigInt
   tokenLiquidity: BigInt
