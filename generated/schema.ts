@@ -575,6 +575,23 @@ export class Pair extends Entity {
     }
   }
 
+  get lastSalePrice(): BigInt | null {
+    let value = this.get("lastSalePrice");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set lastSalePrice(value: BigInt | null) {
+    if (!value) {
+      this.unset("lastSalePrice");
+    } else {
+      this.set("lastSalePrice", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
   get nftIdInventory(): Array<BigInt> | null {
     let value = this.get("nftIdInventory");
     if (!value || value.kind == ValueKind.NULL) {

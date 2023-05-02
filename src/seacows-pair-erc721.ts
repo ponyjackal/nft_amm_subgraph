@@ -111,6 +111,7 @@ export function handleSpotPriceUpdate(event: SpotPriceUpdateEvent): void {
   updatePairAttributesIfMissing(pair);
   if (pair) {
     pair.spotPrice = event.params.newSpotPrice;
+    pair.lastSalePrice = event.params.oldSpotPrice;
     pair.updatedAt = event.block.timestamp;
     pair.save();
   }
