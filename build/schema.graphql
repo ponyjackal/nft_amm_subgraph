@@ -1,25 +1,3 @@
-type NewPair @entity {
-  id: ID!
-  address: String
-  owner: String!
-  blockNumber: BigInt
-  createdAt: BigInt
-  updatedAt: BigInt
-  createdTx: String
-  nft: String
-  erc20Contract: String
-  initialBondingCurveAddress: String
-  initialAssetRecipient: String
-  poolType: BigInt
-  initialDelta: BigInt
-  initialFee: BigInt
-  initialSpotPrice: BigInt!
-  initialNFTIdInventory: [BigInt!]
-  initialInventoryCount: BigInt
-  initialTokenLiquidity: BigInt
-  pair: Pair @derivedFrom(field: "initialAttributes")
-}
-
 type Pair @entity {
   id: ID!
   owner: String!
@@ -38,68 +16,67 @@ type Pair @entity {
   nftIdInventory: [BigInt!]
   inventoryCount: BigInt
   tokenLiquidity: BigInt
-  initialAttributes: NewPair
 }
 
-type DailyPoolStat @entity {
-  id: ID!
-  dayTimestamp: BigInt
-  dayString: String
-  nftContract: String
-  erc20Contract: String
-  numSwaps: BigInt
-  swapVolume: BigInt
-  approxPoolFees: BigInt
-  approxProtocolFees: BigInt
-  approxPoolRevenue: BigInt
-  approxPoolSpent: BigInt
-  tokenDeposited: BigInt
-  tokenWithdrawn: BigInt
-  nftsDeposited: BigInt
-  nftsWithdrawn: BigInt
-  numBuys: BigInt
-  numSells: BigInt
-}
+# type DailyPoolStat @entity {
+#   id: ID!
+#   dayTimestamp: BigInt
+#   dayString: String
+#   nftContract: String
+#   erc20Contract: String
+#   numSwaps: BigInt
+#   swapVolume: BigInt
+#   approxPoolFees: BigInt
+#   approxProtocolFees: BigInt
+#   approxPoolRevenue: BigInt
+#   approxPoolSpent: BigInt
+#   tokenDeposited: BigInt
+#   tokenWithdrawn: BigInt
+#   nftsDeposited: BigInt
+#   nftsWithdrawn: BigInt
+#   numBuys: BigInt
+#   numSells: BigInt
+# }
 
-type DailyPairStat @entity {
-  id: ID!
-  pair: String
-  dayTimestamp: BigInt
-  dayString: String
-  nftContract: String
-  erc20Contract: String
-  numSwaps: BigInt
-  swapVolume: BigInt
-  approxPairFees: BigInt
-  approxProtocolFees: BigInt
-  approxPairRevenue: BigInt
-  approxPairSpent: BigInt
-  tokenDeposited: BigInt
-  tokenWithdrawn: BigInt
-  nftsDeposited: BigInt
-  nftsWithdrawn: BigInt
-  minSpotAsk: BigInt
-  maxSpotBid: BigInt
-  numBuys: BigInt
-  numSells: BigInt
-}
+# type DailyPairStat @entity {
+#   id: ID!
+#   pair: String
+#   dayTimestamp: BigInt
+#   dayString: String
+#   nftContract: String
+#   erc20Contract: String
+#   numSwaps: BigInt
+#   swapVolume: BigInt
+#   approxPairFees: BigInt
+#   approxProtocolFees: BigInt
+#   approxPairRevenue: BigInt
+#   approxPairSpent: BigInt
+#   tokenDeposited: BigInt
+#   tokenWithdrawn: BigInt
+#   nftsDeposited: BigInt
+#   nftsWithdrawn: BigInt
+#   minSpotAsk: BigInt
+#   maxSpotBid: BigInt
+#   numBuys: BigInt
+#   numSells: BigInt
+# }
 
-type DailyProtocolStat @entity {
-  id: ID!
-  dayTimestamp: BigInt
-  dayString: String
-  numSwaps: BigInt
-  swapVolume: BigInt
-  approxPoolFees: BigInt
-  approxProtocolFees: BigInt
-  approxPoolRevenue: BigInt
-  approxPoolSpent: BigInt
-  tokenDeposited: BigInt
-  tokenWithdrawn: BigInt
-  numPoolsCreated: BigInt
-  numPairsCreated: BigInt
-  nftsDeposited: BigInt
-  nftsWithdrawn: BigInt
-  numBuys: BigInt
-  numSells: BigInt
-}
+# type DailyProtocolStat @entity {
+#   id: ID!
+#   dayTimestamp: BigInt
+#   dayString: String
+#   numSwaps: BigInt
+#   swapVolume: BigInt
+#   approxPoolFees: BigInt
+#   approxProtocolFees: BigInt
+#   approxPoolRevenue: BigInt
+#   approxPoolSpent: BigInt
+#   tokenDeposited: BigInt
+#   tokenWithdrawn: BigInt
+#   numPoolsCreated: BigInt
+#   numPairsCreated: BigInt
+#   nftsDeposited: BigInt
+#   nftsWithdrawn: BigInt
+#   numBuys: BigInt
+#   numSells: BigInt
+# }
